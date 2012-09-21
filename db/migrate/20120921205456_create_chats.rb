@@ -1,9 +1,10 @@
 class CreateChats < ActiveRecord::Migration
   def change
     create_table :chats do |t|
-      t.integer :sender_id
-      t.integer :reciever_id
-      t.string :content
+      t.text :content
+      t.integer :user_id
+      t.integer :chat_session_id
+      t.boolean :read
 
       t.timestamps
     end

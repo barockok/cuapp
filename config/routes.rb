@@ -1,9 +1,17 @@
 Cuapp::Application.routes.draw do
-  get "page/home"
+  get "user/index"
 
-  resources :chats
+  get "user/register"
+
+  get "user/signin"
+
+  get "user/signout"
+
+  get "user/account"
+
+  get "page/home"
   
- root :to => 'page#home'
+  root :to => 'page#home'
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

@@ -11,14 +11,42 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120921180420) do
+ActiveRecord::Schema.define(:version => 20120921224752) do
+
+  create_table "chat_channel_subscribers", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "chat_channel_id"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
+  create_table "chat_channels", :force => true do |t|
+    t.integer  "initiator_id"
+    t.string   "type"
+    t.boolean  "active"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
 
   create_table "chats", :force => true do |t|
-    t.integer  "sender_id"
-    t.integer  "reciever_id"
-    t.string   "content"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.text     "content"
+    t.integer  "user_id"
+    t.integer  "chat_channel_id"
+    t.boolean  "read"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
+  create_table "users", :force => true do |t|
+    t.string   "complete_name"
+    t.string   "email"
+    t.string   "password"
+    t.string   "username"
+    t.boolean  "active"
+    t.text     "bio"
+    t.string   "activation_key"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
   end
 
 end
