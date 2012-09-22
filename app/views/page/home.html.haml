@@ -1,2 +1,25 @@
-%h1 Page#home
-%p Find me in app/views/page/home.html.haml
+%h1.center-text CuApp
+%hr
+#sign-form
+	.row-fluid
+		.span6.offset3
+		
+			%form
+				.form-horizontal
+					.control-group
+						%label.control-label Email
+						.controls
+							%input{:type => 'text', :name => 'email'}
+					.control-group
+						%label.control-label Password
+						.controls
+							%input{:type => 'password', :name => 'password'}
+				.form-actions.center-text
+					%button.btn Signin
+					
+				
+#register-form
+	.row-fluid
+		.span6.offset3
+		
+		
