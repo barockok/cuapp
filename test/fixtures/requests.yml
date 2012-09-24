@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  user_id: 1
+  confirm_action: MyString
+  refuse_action: MyString
+  description: MyText
+  archive: false
+
+two:
+  user_id: 1
+  confirm_action: MyString
+  refuse_action: MyString
+  description: MyText
+  archive: false

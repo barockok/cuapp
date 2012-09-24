@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120921224752) do
+ActiveRecord::Schema.define(:version => 20120924202602) do
 
   create_table "chat_channel_subscribers", :force => true do |t|
     t.integer  "user_id"
@@ -32,9 +32,33 @@ ActiveRecord::Schema.define(:version => 20120921224752) do
     t.text     "content"
     t.integer  "user_id"
     t.integer  "chat_channel_id"
-    t.boolean  "read"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.boolean  "read",            :default => false
+    t.datetime "created_at",                         :null => false
+    t.datetime "updated_at",                         :null => false
+  end
+
+  create_table "friend_connections", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "friend_id"
+    t.boolean  "confirm",    :default => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
+  end
+
+  create_table "requests", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "confirm_action"
+    t.string   "refuse_action"
+    t.text     "description"
+    t.boolean  "archive",        :default => false
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
+  end
+
+  create_table "things", :force => true do |t|
+    t.text     "content"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "users", :force => true do |t|
@@ -42,11 +66,15 @@ ActiveRecord::Schema.define(:version => 20120921224752) do
     t.string   "email"
     t.string   "password"
     t.string   "username"
-    t.boolean  "active"
+    t.boolean  "active",         :default => false
     t.text     "bio"
     t.string   "activation_key"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
+    t.string   "token_key"
   end
+
+  add_index "users", ["email"], :name => "index_users_on_email"
+  add_index "users", ["username"], :name => "index_users_on_username"
 
 end

@@ -1,9 +1,8 @@
 %h1.center-text CuApp
 %hr
-#sign-form
+#sign-form.relative
 	.row-fluid
-		.span6.offset3
-		
+		.span12
 			%form
 				.form-horizontal
 					.control-group
@@ -14,12 +13,123 @@
 						%label.control-label Password
 						.controls
 							%input{:type => 'password', :name => 'password'}
-				.form-actions.center-text
-					%button.btn Signin
+				%hr
+				.actions.center-text
+					%button.btn.btn-info
+						%i.icon.icon-signin
+						Signin
+					%span.btn#show-signupform 
+						%i.icon.icon-edit
+						Signup
 					
-				
-#register-form
+#signup-form.relative.hide
 	.row-fluid
-		.span6.offset3
+		.span12
+			%form
+				.form-horizontal
+					.control-group
+						%label.control-label Complete Name
+						.controls
+							%input{:type => 'text', :name => 'register[complete_name]'}
+					.control-group
+						%label.control-label Username
+						.controls
+							%input{:type => 'text', :name => 'register[username]'}
+					%hr
+					.control-group
+						%label.control-label Email
+						.controls
+							%input{:type => 'text', :name => 'register[email]'}
+					.control-group
+						%label.control-label Password
+						.controls
+							%input{:type => 'password', :name => 'register[password]'}
+					.actions.center-text
+						%button.btn.btn-info
+							%i.icon.icon-edit
+							Signup
+						%span.btn#show_signin_form
+							%i.icon.icon-signin
+							Signin
+=content_for :bottom_js do
+	:javascript
+			$(document).ready(function(){
+				$('#show-signupform').live('click', function(){
+					showSignupForm()
+				})
+				$('#show_signin_form').live('click', function(){
+					showSigninForm()
+				})
+				$('#signup-form form').submit(function(e){
+					e.preventDefault()
+					signup();
+				})
+				$('#sign-form form').submit(function(e){
+					e.preventDefault()
+					signin()
+				})
+				
+			})
+			function signup(){
+					var data = $('#signup-form form').serialize();
+					$.ajax({
+						url : "#{user_signup_path}",
+						data : data,
+						type : 'post',
+						dataType : 'json',
+						success: function(res){
+							
+						},
+						error: function(res){
+							
+						}
+						
+					})
+			}
+			function signin(){
+				var data = $('#sign-form form').serialize();
+				$.ajax({
+					url : "#{user_signin_path}",
+					data : data,
+					type : 'post',
+					dataType : 'json',
+					success: function(res){
+						
+					},
+					error: function(res){
+						
+					}
+					
+				})
+			}
+			function showSigninForm(){
+				$('#signup-form').transit({
+					right: '-500px'
+				}, 500 , 'ease', function(){
+					$('#signup-form').addClass('hide')
+					$('#sign-form').removeClass('hide').transit({
+						left:'0px'
+					})
+					
+				})
+			}
+			function showSignupForm(){
+				$('#sign-form').transit({
+					left: '-500px' 
+				}, 500, 'ease', function(){
+					$('#sign-form').addClass('hide')
+					$('#signup-form').css({right:'-500px'}).removeClass('hide').transit({
+						right: '0px',
+						
+					})
+				})
+			}
+			
+		
+			
+		
+							
+					
+		
 		
 		

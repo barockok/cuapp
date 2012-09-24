@@ -1,9 +1,20 @@
 Cuapp::Application.routes.draw do
+  
+  resources :things
+
+  get "app/index"
+
+  get "app/contact"
+
+  get "app/channel"
+
+  get "app/chat"
+
   get "user/index"
 
-  get "user/register"
+  match "user/signup"
 
-  get "user/signin"
+  post "user/signin"
 
   get "user/signout"
 
